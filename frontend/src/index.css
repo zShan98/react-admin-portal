@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... */
+
+@theme {
+  --color-font-blue: rgb(43, 54, 116);
+  --color-font-gray: rgb(163, 174, 208);
+  --color-font-gray-secondary: rgb(143 155 186);
+  --color-primary-blue: rgb(14, 58, 200);
+  --color-secondary-blue: rgb(31, 149, 237);
+  --color-button-blue: rgb(28, 91, 236);
+  --color-secondary-background: rgb(244 247 254);
+  --color-primary-background: rgb(255 255 255);
+}
+
+@layer base {
+  body {
+    @apply bg-secondary-background
+  }
+}
+
+@layer components {
+  .main-gradient {
+    @apply bg-gradient-to-tl from-primary-blue to-secondary-blue;
+  }
+
+  .main-gradient-top {
+    @apply bg-gradient-to-t from-primary-blue to-secondary-blue;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-b from-[#FFFFFF] via-[#D0EFFF] to-[#A7E2FF] bg-clip-text text-transparent
+  }
+}
