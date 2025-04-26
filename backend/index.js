@@ -1,25 +1,20 @@
 const app = require('./app');
 const db = require('./db');
 const dotenv = require('dotenv');
-const serverless = require('serverless-http'); // Added!
 
 dotenv.config();
 
-// Connect to DB
-let isConnected = false;
+const port = process.env.PORT || 3000;
 
-async function connectToDatabase() {
-  if (!isConnected) {
-    await db.connect();
-    isConnected = true;
-    console.log('MongoDB connected');
+  async function start() {
+    try {
+      await db.connect();
+      app.listen(port, () => {
+        console.log(`Server listening on port ${port}\nhttp://localhost:${port}`);
+      });
+    } catch (error) {
+      console.error('index.js:', error);
+    }
   }
-}
 
-// Export the serverless handler
-const handler = serverless(app);
-
-module.exports.handler = async (event, context) => {
-  await connectToDatabase();
-  return handler(event, context);
-};
+  start();
